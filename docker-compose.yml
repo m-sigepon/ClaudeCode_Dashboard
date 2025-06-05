@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  dashboard:
+    build: .
+    ports:
+      - "3300:3000"
+    environment:
+      - NODE_ENV=production
+      - HOME=/home/nextjs
+    volumes:
+      # Mount only the data directory, not the entire config
+      # Update path based on non-root user (nextjs)
+      - ~/.claude/db:/home/nextjs/.claude/db:ro
+    restart: unless-stopped
